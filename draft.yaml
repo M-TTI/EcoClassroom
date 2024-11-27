@@ -1,0 +1,13 @@
+models:
+  Classroom:
+    label: string
+    letter: string
+    relationships:
+      belongsTo: User
+
+  Transport:
+    label: string
+    color: string
+    points: unsigned integer
+    relationships:
+      belongsToMany: User
