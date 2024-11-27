@@ -1,7 +1,8 @@
 models:
   Classroom:
     label: string
-    letter: string
+    letter: char
+    user_id: unsigned integer
     relationships:
       belongsTo: User
 
