@@ -7,6 +7,7 @@ use App\Models\Transport;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $teacherRole = Role::create(['name' => 'teacher']);
+        $studentRole = Role::create(['name' => 'student']);
+
         // User::factory(10)->create();
         User::factory()->create([
             'name' => 'M_TTI',
@@ -34,9 +38,11 @@ class DatabaseSeeder extends Seeder
         $c->user_id = 1;
         $c->save();
 
-        User::factory(10)->create([
+        User::factory(10)->student()->create([
             'classroom_id' => $c->id,
         ]);
+
+        User::factory(5)->teacher()->create();
 
         Classroom::factory(5)->create();
         Transport::factory(5)->create();
