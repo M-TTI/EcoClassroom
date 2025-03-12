@@ -24,16 +24,23 @@ new class extends Component
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" wire:navigate>
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+{{--                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />--}}
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                        {{ __('Tableau de Bord') }}
                     </x-nav-link>
                 </div>
+                @if(auth()->user()->hasrole('teacher'))
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('classe')" :active="request()->routeIs('class')" wire:navigate>
+                        {{ __('Votre Classe') }}
+                    </x-nav-link>
+                </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -59,9 +66,16 @@ new class extends Component
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
-                                {{ __('Log Out') }}
+                                {{ __('Se Déconnecter') }}
                             </x-dropdown-link>
                         </button>
+                        <!-- Admin Panel access-->
+                        @if(auth()->user()->is_admin)
+                            <x-dropdown-link :href="route('panneau-admin')" wire:navigate>
+                                {{ __('Panneau Administrateur') }}
+                            </x-dropdown-link>
+
+                        @endif
                     </x-slot>
                 </x-dropdown>
             </div>

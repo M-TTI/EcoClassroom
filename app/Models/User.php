@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -50,9 +51,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function classrooms() : HasMany
+    public function classrooms() : HasOne
     {
-        return $this->hasMany(Classroom::class);
+        return $this->hasOne(Classroom::class);
     }
     public function classroom() : BelongsTo
     {

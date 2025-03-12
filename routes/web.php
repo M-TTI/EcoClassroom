@@ -23,6 +23,12 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::get('manage-classrooms', AdminPanel::class)->middleware(['auth']);
+Route::get('panneau-admin', AdminPanel::class)
+    ->middleware(['auth'])
+    ->name('panneau-admin');
+
+Route::get('classe', \App\Livewire\Notes::class)
+    ->middleware(['auth'])
+    ->name('classe');
 
 require __DIR__.'/auth.php';

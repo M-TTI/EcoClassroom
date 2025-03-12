@@ -18,7 +18,6 @@ class Classroom extends Model
      */
     protected $fillable = [
         'label',
-        'letter',
         'user_id',
     ];
 

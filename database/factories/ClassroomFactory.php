@@ -23,7 +23,6 @@ class ClassroomFactory extends Factory
     {
         return [
             'label' => $this->faker->word(),
-            'letter' => $this->faker->randomLetter(),
             'user_id' => User::factory(),
         ];
     }

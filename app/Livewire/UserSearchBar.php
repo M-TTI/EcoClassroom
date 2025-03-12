@@ -38,6 +38,7 @@ class UserSearchBar extends Component
         $this->toggleResults = false;
         $this->searchText = $name;
         $this->searchResults = new Collection();
+        $this->dispatch('userSelected', $name);
     }
 
     public function selectFirst()
@@ -45,6 +46,7 @@ class UserSearchBar extends Component
         $this->searchText = $this->searchResults->first()->name;
         $this->toggleResults = false;
         $this->searchResults = new Collection();
+        $this->dispatch('userSelected', $this->searchText);
     }
 
     #[Layout('layouts.guest')]

@@ -26,15 +26,22 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
             'is_admin' => 1,
         ]);
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'is_admin' => 1,
+        User::factory()->student()->create([
+            'name' => 'Test Student',
+            'email' => 'test.s@example.com',
+            'password' => 'password',
+            'is_admin' => 0,
+        ]);
+
+        User::factory()->teacher()->create([
+            'name' => 'Test Teacher',
+            'email' => 'test.t@example.com',
+            'password' => 'password',
+            'is_admin' => 0,
         ]);
 
         $c = new Classroom;
         $c->label = 'SIO2';
-        $c->letter = 'A';
         $c->user_id = 1;
         $c->save();
 
