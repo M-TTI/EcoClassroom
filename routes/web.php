@@ -11,7 +11,13 @@ use Illuminate\Support\Facades\Route;
 //    Auth::login(User::find(1));
 //}
 
-Route::view('/', 'welcome');
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('dashboard');
+    } else {
+        return redirect('login');
+    }
+})->name('home');
 
 Route::get('search', UserSearchBar::class);
 

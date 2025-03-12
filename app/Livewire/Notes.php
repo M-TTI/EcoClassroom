@@ -14,13 +14,38 @@ class Notes extends Component
     public $classroom;
     public $students;
 
+    public $grades = [];
+
     public function mount()
     {
         $this->user = Auth::user();
 
         $this->classroom = $this->user->classrooms;
+        foreach ($this->classroom->students as $student) {
+            $this->grades[$student->id] = '';
+        }
 
-        $this->students = User::role('student')->get();
+        $this->students = $this->classroom->students;
+    }
+
+    public function submitGrades()
+    {
+
+        foreach ($this->grades as $studentId => $grade) {
+            $student = User::find($studentId);
+            if ($student) {
+                $student->last_grade = $grade;
+                $student->average = $this->calculateAverage($student);
+                $student->save();
+            }
+        }
+
+        session()->flash('message', 'Grades submitted successfully.');
+    }
+
+    private function calculateAverage($student)
+    {
+        return ($student->last_grade + $student->average) / 2;
     }
 
     #[Layout('layouts.app')]
