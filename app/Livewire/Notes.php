@@ -30,11 +30,11 @@ class Notes extends Component
 
     public function submitGrades()
     {
-
+        dd('submitGrades function triggered');
         foreach ($this->grades as $studentId => $grade) {
             $student = User::find($studentId);
             if ($student) {
-                $student->last_grade = $grade;
+                $student->last_grade = (int) $grade;
                 $student->average = $this->calculateAverage($student);
                 $student->save();
             }

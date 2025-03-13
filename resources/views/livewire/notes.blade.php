@@ -29,7 +29,7 @@
         align-items: center;
     }
     .student-name {
-        width: 200px; /* Adjust the width as needed */
+        width: 200px;
         flex-shrink: 0;
     }
     .student-grades {
@@ -38,7 +38,7 @@
     }
 </style>
 
-<form wire:submit.prevent="submitGrades">
+<form wire:submit="submitGrades">
     <div class="flex text-white">
         <div class="mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden flex-grow rounded-lg">
             @forelse($classroom->students as $student)
@@ -61,6 +61,7 @@
             @empty
                 <div>No students in this classroom.</div>
             @endforelse
+
             <button type="submit" class="bg-blue-400 rounded p-2 mt-4 hover:bg-blue-600 disabled:bg-gray-500 disabled:cursor-not-allowed">
                 Submit Grades
             </button>
